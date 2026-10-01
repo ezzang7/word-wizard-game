@@ -1,15 +1,16 @@
 // ========================================================
-// 단어 마법사 (Word Wizard RPG) - 10-Level S-Curve & Star Engine
+// 단어 마법사 (Word Wizard RPG) - 12 Levels & Boss Battle Engine
 // ========================================================
 
-// 1. 10 Playable Wizard Ranks (100-Level Vision, S-Curve Difficulty)
+// 1. 12 Playable Wizard Ranks (Doubled Monster Count & Boss Levels)
 const WIZARD_RANK_DATABASE = {
     rank1: {
         title: '견습 마법사',
         icon: '📜',
-        desc: '3글자 파닉스 (5마리 / 완만한 속도)',
-        monsterCount: 5,
+        desc: '3글자 기초 파닉스 (10마리 / 완만한 속도)',
+        monsterCount: 10,
         speed: 0.20,
+        isBoss: false,
         words: [
             { word: 'cat', hint: '고양이', emoji: '🐱' },
             { word: 'dog', hint: '개 / 강아지', emoji: '🐶' },
@@ -31,9 +32,10 @@ const WIZARD_RANK_DATABASE = {
     rank2: {
         title: '기초 마법사',
         icon: '🧹',
-        desc: '3~4글자 기초 단어 (6마리 / 기초 속도)',
-        monsterCount: 6,
-        speed: 0.25,
+        desc: '3~4글자 기초 단어 (12마리 / 기초 속도)',
+        monsterCount: 12,
+        speed: 0.24,
+        isBoss: false,
         words: [
             { word: 'fox', hint: '여우', emoji: '🦊' },
             { word: 'gem', hint: '보석', emoji: '💎' },
@@ -52,9 +54,10 @@ const WIZARD_RANK_DATABASE = {
     rank3: {
         title: '원소 마법사',
         icon: '🔮',
-        desc: '4글자 생활 어휘 (7마리 / 중간 속도)',
-        monsterCount: 7,
-        speed: 0.30,
+        desc: '4글자 생활 어휘 (14마리 / 중간 속도)',
+        monsterCount: 14,
+        speed: 0.28,
+        isBoss: false,
         words: [
             { word: 'blue', hint: '파란색', emoji: '🔵' },
             { word: 'pink', hint: '분홍색', emoji: '🩷' },
@@ -71,11 +74,13 @@ const WIZARD_RANK_DATABASE = {
         ]
     },
     rank4: {
-        title: '수호 마법사',
-        icon: '🛡️',
-        desc: '4~5글자 일상 어휘 (8마리 / 가속 시작)',
-        monsterCount: 8,
+        title: '🔥 화염 마왕전',
+        icon: '👹',
+        desc: '⚠️ 1차 중간보스전! (16마리 / 연속 연쇄 공격)',
+        monsterCount: 16,
         speed: 0.35,
+        isBoss: true,
+        bossEmoji: '🔥👹',
         words: [
             { word: 'lion', hint: '사자', emoji: '🦁' },
             { word: 'wind', hint: '바람', emoji: '🌬️' },
@@ -92,9 +97,10 @@ const WIZARD_RANK_DATABASE = {
     rank5: {
         title: '번개 마법사',
         icon: '⚡',
-        desc: '5글자 핵심 어휘 (9마리 / 빠른 속도)',
-        monsterCount: 9,
+        desc: '5글자 핵심 어휘 (18마리 / 빠름)',
+        monsterCount: 18,
         speed: 0.40,
+        isBoss: false,
         words: [
             { word: 'rabbit', hint: '토끼', emoji: '🐰' },
             { word: 'school', hint: '학교', emoji: '🏫' },
@@ -110,9 +116,10 @@ const WIZARD_RANK_DATABASE = {
     rank6: {
         title: '빙결 마법사',
         icon: '❄️',
-        desc: '5~6글자 고급 어휘 (10마리 / 고속)',
-        monsterCount: 10,
-        speed: 0.48,
+        desc: '5~6글자 고급 어휘 (20마리 / 고속)',
+        monsterCount: 20,
+        speed: 0.45,
+        isBoss: false,
         words: [
             { word: 'family', hint: '가족', emoji: '👨‍👩‍👧‍👦' },
             { word: 'mother', hint: '엄마', emoji: '👩' },
@@ -128,9 +135,10 @@ const WIZARD_RANK_DATABASE = {
     rank7: {
         title: '별빛 마법사',
         icon: '🌟',
-        desc: '6글자 교과 필수 어휘 (11마리 / 급경사 시작)',
-        monsterCount: 11,
-        speed: 0.56,
+        desc: '6글자 교과 필수 (22마리 / 급경사 시작)',
+        monsterCount: 22,
+        speed: 0.50,
+        isBoss: false,
         words: [
             { word: 'castle', hint: '성 / 성곽', emoji: '🏰' },
             { word: 'planet', hint: '행성', emoji: '🪐' },
@@ -143,11 +151,13 @@ const WIZARD_RANK_DATABASE = {
         ]
     },
     rank8: {
-        title: '용 마법사',
+        title: '🐉 암흑 드래곤전',
         icon: '🐉',
-        desc: '6~7글자 도전자 어휘 (12마리 / 초고속)',
-        monsterCount: 12,
-        speed: 0.65,
+        desc: '⚠️ 2차 중간보스전! (24마리 / 초고속 연쇄)',
+        monsterCount: 24,
+        speed: 0.60,
+        isBoss: true,
+        bossEmoji: '🐉🔥',
         words: [
             { word: 'monster', hint: '괴물 / 몬스터', emoji: '👾' },
             { word: 'rainbow', hint: '무지개', emoji: '🌈' },
@@ -161,9 +171,10 @@ const WIZARD_RANK_DATABASE = {
     rank9: {
         title: '시공 마법사',
         icon: '🌌',
-        desc: '7~8글자 영웅 어휘 (14마리 / 수퍼 스피드)',
-        monsterCount: 14,
-        speed: 0.75,
+        desc: '7~8글자 영웅 어휘 (26마리 / 수퍼 스피드)',
+        monsterCount: 26,
+        speed: 0.68,
+        isBoss: false,
         words: [
             { word: 'dinosaur', hint: '공룡', emoji: '🦖' },
             { word: 'universe', hint: '우주', emoji: '🌌' },
@@ -175,24 +186,53 @@ const WIZARD_RANK_DATABASE = {
         ]
     },
     rank10: {
-        title: '대마법사',
-        icon: '👑',
-        desc: '8글자+ 마스터 어휘 (15마리 / 한계 도전자)',
-        monsterCount: 15,
-        speed: 0.85,
+        title: '신화 마법사',
+        icon: '⚡',
+        desc: '8글자+ 마스터 어휘 (28마리 / 한계 도전)',
+        monsterCount: 28,
+        speed: 0.75,
+        isBoss: false,
         words: [
             { word: 'adventure', hint: '모험', emoji: '🗺️' },
             { word: 'beautiful', hint: '아름다운', emoji: '✨' },
             { word: 'butterfly', hint: '나비', emoji: '🦋' },
             { word: 'sunshine', hint: '햇살', emoji: '☀️' },
             { word: 'chocolate', hint: '초콜릿', emoji: '🍫' },
-            { word: 'challenge', hint: '도전', emoji: '🎯' },
-            { word: 'champion', hint: '챔피언 / 1위', emoji: '🏆' }
+            { word: 'challenge', hint: '도전', emoji: '🎯' }
+        ]
+    },
+    rank11: {
+        title: '차원 마법사',
+        icon: '🪐',
+        desc: '고난도 융합 어휘 (30마리 / 하이퍼 스피드)',
+        monsterCount: 30,
+        speed: 0.82,
+        isBoss: false,
+        words: [
+            { word: 'champion', hint: '챔피언 / 1위', emoji: '🏆' },
+            { word: 'dimension', hint: '차원 / 공간', emoji: '🌀' },
+            { word: 'galaxy', hint: '은하수', emoji: '🌌' },
+            { word: 'legendary', hint: '전설적인', emoji: '🌟' }
+        ]
+    },
+    rank12: {
+        title: '👑 파멸의 마왕전',
+        icon: '👑',
+        desc: '⚠️ 최종 보스 결전! (32마리 / 극한의 타격전)',
+        monsterCount: 32,
+        speed: 0.90,
+        isBoss: true,
+        bossEmoji: '👑👿',
+        words: [
+            { word: 'masterpiece', hint: '걸작 / 명작', emoji: '🎨' },
+            { word: 'overlord', hint: '파멸의 마왕', emoji: '👑' },
+            { word: 'apocalypse', hint: '종말 / 파멸', emoji: '🔥' },
+            { word: 'victory', hint: '최종 승리', emoji: '✌️' }
         ]
     }
 };
 
-// Diverse 15 Monster Catalog
+// 15 Monster Catalog
 const MONSTER_CATALOG = [
     { emoji: '👾', name: '외계 슬라임' },
     { emoji: '👻', name: '유령 구체' },
@@ -247,11 +287,11 @@ class LeaderboardSystem {
     static STORAGE_KEY = 'word_wizard_global_leaderboard';
 
     static DEFAULT_HALL_OF_FAME = [
-        { name: '지우', avatar: '🧙‍♂️', score: 48500, rankTitle: '대마법사' },
-        { name: '수아', avatar: '🧙‍♀️', score: 36400, rankTitle: '용 마법사' },
-        { name: '현우', avatar: '🧝‍♂️', score: 28900, rankTitle: '빙결 마법사' },
-        { name: '서연', avatar: '🧙‍♀️', score: 19200, rankTitle: '수호 마법사' },
-        { name: '하준', avatar: '🧙‍♂️', score: 12800, rankTitle: '원소 마법사' }
+        { name: '지우', avatar: '🧙‍♂️', score: 68500, rankTitle: '👑 파멸의 마왕전' },
+        { name: '수아', avatar: '🧙‍♀️', score: 54400, rankTitle: '차원 마법사' },
+        { name: '현우', avatar: '🧝‍♂️', score: 42900, rankTitle: '🐉 암흑 드래곤전' },
+        { name: '서연', avatar: '🧙‍♀️', score: 31200, rankTitle: '빙결 마법사' },
+        { name: '하준', avatar: '🧙‍♂️', score: 22800, rankTitle: '🔥 화염 마왕전' }
     ];
 
     static getLeaderboard() {
@@ -269,7 +309,7 @@ class LeaderboardSystem {
     static submitScore(playerName, avatar, score, unlockedLevel) {
         if (!playerName || score <= 0) return;
 
-        const rankInfo = WIZARD_RANK_DATABASE[`rank${Math.min(unlockedLevel, 10)}`] || WIZARD_RANK_DATABASE.rank1;
+        const rankInfo = WIZARD_RANK_DATABASE[`rank${Math.min(unlockedLevel, 12)}`] || WIZARD_RANK_DATABASE.rank1;
         const rankTitle = rankInfo.title;
 
         let list = LeaderboardSystem.getLeaderboard();
@@ -468,14 +508,14 @@ class WordWizardGame {
             avatarTitle: '불꽃 마법사',
             cumulativeScore: 0,
             unlockedLevel: 1,
-            levelStars: {} // { 1: 3, 2: 2, ... }
+            levelStars: {}
         };
 
         this.currentLevel = 1;
         this.stageScore = 0;
         this.combo = 0;
         this.maxCombo = 0;
-        this.totalMonstersInWave = 5;
+        this.totalMonstersInWave = 10;
         this.monstersDefeatedInWave = 0;
 
         this.currentWordList = [];
@@ -489,10 +529,11 @@ class WordWizardGame {
         this.ctx = this.canvas.getContext('2d');
 
         this.wizard = { x: 80, y: 200, casting: false };
-        this.monster = { x: 620, y: 190, hp: 100, maxHp: 100, emoji: '👾', speed: 0.25, visible: true };
+        this.monster = { x: 620, y: 190, hp: 100, maxHp: 100, emoji: '👾', speed: 0.25, visible: true, isBoss: false };
         this.projectiles = [];
         this.particles = [];
         this.fireworks = [];
+        this.screenShake = 0;
 
         this.animationId = null;
 
@@ -509,6 +550,8 @@ class WordWizardGame {
         this.gameScreen = document.getElementById('game-screen');
         this.resultModal = document.getElementById('result-modal');
         this.leaderboardModal = document.getElementById('leaderboard-modal');
+        this.fireworksBanner = document.getElementById('fireworks-banner-overlay');
+        this.bossWarningTag = document.getElementById('boss-warning-tag');
 
         this.profileFormBox = document.getElementById('profile-form-box');
         this.savedProfileCard = document.getElementById('saved-profile-card');
@@ -622,10 +665,10 @@ class WordWizardGame {
 
         document.getElementById('next-stage-btn').addEventListener('click', () => {
             this.resultModal.classList.remove('active');
-            if (this.currentLevel < 10) {
+            if (this.currentLevel < 12) {
                 this.startLevelGame(this.currentLevel + 1);
             } else {
-                alert('🏆 10레벨 최고 계급 대마법사 시험을 통과하셨습니다! 당신은 전설의 대마법사입니다!');
+                alert('🏆 12레벨 최종 파멸의 마왕을 무찌르고 세계를 구했습니다! 당신은 전설의 대마법사입니다!');
                 this.openLevelSelectMap();
             }
         });
@@ -710,7 +753,6 @@ class WordWizardGame {
         targetScreen.classList.add('active');
     }
 
-    // Render 10 Level Cards Grid dynamically
     openLevelSelectMap() {
         this.showScreen(this.levelSelectScreen);
 
@@ -721,13 +763,13 @@ class WordWizardGame {
         const gridContainer = document.getElementById('level-grid-container');
         gridContainer.innerHTML = '';
 
-        for (let lvl = 1; lvl <= 10; lvl++) {
+        for (let lvl = 1; lvl <= 12; lvl++) {
             const rankData = WIZARD_RANK_DATABASE[`rank${lvl}`];
             const isUnlocked = lvl <= this.player.unlockedLevel;
             const starsCount = (this.player.levelStars && this.player.levelStars[lvl]) || 0;
 
             const card = document.createElement('div');
-            card.className = `level-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+            card.className = `level-card ${isUnlocked ? 'unlocked' : 'locked'} ${rankData.isBoss ? 'boss-card' : ''}`;
             card.dataset.level = lvl;
 
             const starsDisplay = isUnlocked 
@@ -766,9 +808,16 @@ class WordWizardGame {
         this.maxCombo = 0;
         this.monstersDefeatedInWave = 0;
         this.fireworks = [];
+        this.fireworksBanner.classList.add('hidden');
 
         const rankInfo = WIZARD_RANK_DATABASE[`rank${this.currentLevel}`] || WIZARD_RANK_DATABASE.rank1;
         this.totalMonstersInWave = rankInfo.monsterCount;
+
+        if (rankInfo.isBoss) {
+            this.bossWarningTag.classList.remove('hidden');
+        } else {
+            this.bossWarningTag.classList.add('hidden');
+        }
 
         this.showScreen(this.gameScreen);
 
@@ -777,8 +826,14 @@ class WordWizardGame {
         this.stageVal.textContent = rankInfo.title;
         this.updateHUD();
 
-        const shuffledWords = [...rankInfo.words].sort(() => Math.random() - 0.5);
-        this.currentWordList = shuffledWords.slice(0, this.totalMonstersInWave);
+        // Loop words to fill monsterCount
+        let pool = [...rankInfo.words];
+        let wordList = [];
+        while (wordList.length < this.totalMonstersInWave) {
+            pool.sort(() => Math.random() - 0.5);
+            wordList = wordList.concat(pool);
+        }
+        this.currentWordList = wordList.slice(0, this.totalMonstersInWave);
         this.currentWordIndex = 0;
 
         this.spawnNextWordMonster();
@@ -805,10 +860,15 @@ class WordWizardGame {
         this.monster.x = 640;
         this.monster.hp = 100;
         this.monster.maxHp = 100;
+        this.monster.isBoss = rankInfo.isBoss;
 
-        // Select diverse monster emoji from catalog
-        const monsterItem = MONSTER_CATALOG[(this.currentLevel + this.currentWordIndex) % MONSTER_CATALOG.length];
-        this.monster.emoji = monsterItem.emoji;
+        if (rankInfo.isBoss && this.currentWordIndex >= this.totalMonstersInWave - 1) {
+            this.monster.emoji = rankInfo.bossEmoji || '👑👿';
+        } else {
+            const monsterItem = MONSTER_CATALOG[(this.currentLevel + this.currentWordIndex) % MONSTER_CATALOG.length];
+            this.monster.emoji = monsterItem.emoji;
+        }
+
         this.monster.speed = rankInfo.speed;
         this.monster.visible = true;
 
@@ -915,6 +975,10 @@ class WordWizardGame {
             this.monstersDefeatedInWave++;
             this.updateHUD();
 
+            if (this.monster.isBoss) {
+                this.screenShake = 16;
+            }
+
             setTimeout(() => {
                 this.currentWordIndex++;
                 this.spawnNextWordMonster();
@@ -926,17 +990,17 @@ class WordWizardGame {
     }
 
     spawnExplosion(x, y, isBig) {
-        const particleCount = isBig ? 50 : 18;
+        const particleCount = isBig ? (this.monster.isBoss ? 80 : 50) : 18;
         for (let i = 0; i < particleCount; i++) {
             const angle = Math.random() * Math.PI * 2;
-            const speed = (isBig ? 5 : 2) + Math.random() * 8;
+            const speed = (isBig ? 6 : 2) + Math.random() * 9;
             this.particles.push({
                 x: x,
                 y: y - 30,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
-                color: ['#FFEAA7', '#FF7675', '#A29BFE', '#00CEC9', '#FD79A8'][Math.floor(Math.random() * 5)],
-                radius: (isBig ? 6 : 3) + Math.random() * 5,
+                color: ['#FFEAA7', '#FF7675', '#A29BFE', '#00CEC9', '#FD79A8', '#55E6C1'][Math.floor(Math.random() * 6)],
+                radius: (isBig ? 7 : 3) + Math.random() * 6,
                 alpha: 1.0
             });
         }
@@ -944,45 +1008,44 @@ class WordWizardGame {
 
     launchFireworks() {
         const colors = ['#FFEAA7', '#FF7675', '#A29BFE', '#00CEC9', '#FD79A8', '#55E6C1', '#F8EFBA'];
-        for (let burst = 0; burst < 6; burst++) {
+        for (let burst = 0; burst < 10; burst++) {
             setTimeout(() => {
                 this.soundFx.playFireworkLaunch();
-                const startX = 100 + Math.random() * 600;
-                const startY = 100 + Math.random() * 120;
+                const startX = 80 + Math.random() * 640;
+                const startY = 80 + Math.random() * 140;
                 const burstColor = colors[Math.floor(Math.random() * colors.length)];
 
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 45; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = 2 + Math.random() * 6;
+                    const speed = 2 + Math.random() * 7;
                     this.fireworks.push({
                         x: startX,
                         y: startY,
                         vx: Math.cos(angle) * speed,
                         vy: Math.sin(angle) * speed,
                         color: burstColor,
-                        radius: 3 + Math.random() * 4,
+                        radius: 3 + Math.random() * 5,
                         alpha: 1.0,
-                        decay: 0.015 + Math.random() * 0.015
+                        decay: 0.012 + Math.random() * 0.012
                     });
                 }
-            }, burst * 250);
+            }, burst * 220);
         }
     }
 
-    // Star Rating Logic: ⭐(Clear), ⭐⭐(Combo >= 60%), ⭐⭐⭐(Perfect 100%)
+    // Sequence: Fireworks Banner + 2.5s Canvas Show -> THEN pop up Stats Result Modal
     handleLevelClear() {
         this.player.cumulativeScore += this.stageScore;
 
-        if (this.currentLevel < 10 && this.player.unlockedLevel < this.currentLevel + 1) {
+        if (this.currentLevel < 12 && this.player.unlockedLevel < this.currentLevel + 1) {
             this.player.unlockedLevel = this.currentLevel + 1;
         }
 
-        // Calculate Stars
         let stars = 1;
         if (this.maxCombo >= this.totalMonstersInWave) {
-            stars = 3; // Perfect 100%
-        } else if (this.maxCombo >= Math.floor(this.totalMonstersInWave * 0.6)) {
-            stars = 2; // Good combo
+            stars = 3;
+        } else if (this.maxCombo >= Math.floor(this.totalMonstersInWave * 0.5)) {
+            stars = 2;
         }
 
         if (!this.player.levelStars) this.player.levelStars = {};
@@ -991,9 +1054,12 @@ class WordWizardGame {
         }
 
         SaveSystem.saveProfile(this.player);
-
         LeaderboardSystem.submitScore(this.player.name, this.player.avatar, this.player.cumulativeScore, this.player.unlockedLevel);
 
+        // 1. Show Fireworks Banner Overlay on Canvas
+        this.fireworksBanner.classList.remove('hidden');
+
+        // 2. Launch 2.5s Fireworks Celebration Show
         this.launchFireworks();
 
         const rankData = WIZARD_RANK_DATABASE[`rank${this.currentLevel}`];
@@ -1006,19 +1072,34 @@ class WordWizardGame {
         document.getElementById('modal-max-combo').textContent = this.maxCombo;
 
         const nextBtn = document.getElementById('next-stage-btn');
-        if (this.currentLevel >= 10) {
+        if (this.currentLevel >= 12) {
             nextBtn.textContent = '🏆 전설의 대마법사 달성!';
         } else {
             nextBtn.textContent = `레벨 ${this.currentLevel + 1} 시험 도전 ➡️`;
         }
 
+        // 3. AFTER 2.5 seconds, hide fireworks banner and pop up Result Modal!
         setTimeout(() => {
+            this.fireworksBanner.classList.add('hidden');
             this.resultModal.classList.add('active');
-        }, 500);
+        }, 2600);
     }
 
     gameLoop() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Screen Shake effect on boss impact
+        let shakeX = 0;
+        let shakeY = 0;
+        if (this.screenShake > 0) {
+            shakeX = (Math.random() - 0.5) * this.screenShake;
+            shakeY = (Math.random() - 0.5) * this.screenShake;
+            this.screenShake *= 0.85;
+            if (this.screenShake < 0.5) this.screenShake = 0;
+        }
+
+        this.ctx.save();
+        this.ctx.translate(shakeX, shakeY);
 
         this.drawBackground();
         this.drawWizard();
@@ -1078,7 +1159,7 @@ class WordWizardGame {
 
             this.ctx.save();
             this.ctx.globalAlpha = Math.max(0, fw.alpha);
-            this.ctx.shadowBlur = 10;
+            this.ctx.shadowBlur = 12;
             this.ctx.shadowColor = fw.color;
             this.ctx.fillStyle = fw.color;
             this.ctx.beginPath();
@@ -1091,6 +1172,8 @@ class WordWizardGame {
                 i--;
             }
         }
+
+        this.ctx.restore();
 
         this.animationId = requestAnimationFrame(() => this.gameLoop());
     }
@@ -1129,22 +1212,30 @@ class WordWizardGame {
 
     drawMonster() {
         this.ctx.save();
-        this.ctx.font = '60px serif';
+        const fontSize = this.monster.isBoss ? '75px' : '60px';
+        this.ctx.font = `${fontSize} serif`;
         this.ctx.textAlign = 'center';
 
         const bounceOffset = Math.abs(Math.sin(Date.now() / 200)) * 6;
+
+        if (this.monster.isBoss) {
+            // Glowing Boss Aura
+            this.ctx.shadowBlur = 20;
+            this.ctx.shadowColor = '#FF7675';
+        }
+
         this.ctx.fillText(this.monster.emoji, this.monster.x, this.monster.y - bounceOffset);
 
-        const barW = 60;
+        const barW = this.monster.isBoss ? 80 : 60;
         const barH = 8;
         const barX = this.monster.x - barW / 2;
-        const barY = this.monster.y - 75;
+        const barY = this.monster.y - (this.monster.isBoss ? 90 : 75);
 
         this.ctx.fillStyle = '#2D3436';
         this.ctx.fillRect(barX, barY, barW, barH);
 
         const currentHpW = (this.monster.hp / this.monster.maxHp) * barW;
-        this.ctx.fillStyle = '#FF7675';
+        this.ctx.fillStyle = this.monster.isBoss ? '#D63031' : '#FF7675';
         this.ctx.fillRect(barX, barY, currentHpW, barH);
 
         this.ctx.strokeStyle = '#FFFFFF';
