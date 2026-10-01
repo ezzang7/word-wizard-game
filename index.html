@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 마법사 (Word Wizard RPG) - 초등 영어 게임</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gamja+Flower&family=Fredoka:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="logo-box">
+                <span class="magic-sparkle">✨</span>
+                <h1>단어 마법사</h1>
+                <p class="subtitle">Word Wizard RPG</p>
+                <div class="grade-badge">초등 저학년 추천 🌟</div>
+            </div>
+
+            <div class="character-preview">
+                <div class="wizard-avatar-large">🧙‍♂️</div>
+                <div class="preview-dialog">"주문(영단어)을 외워서 몬스터를 퇴치하자!"</div>
+            </div>
+
+            <div class="category-select">
+                <h3>학습할 단어 주제 선택</h3>
+                <div class="category-grid">
+                    <button class="cat-btn active" data-cat="animals">🐱 동물 (Animals)</button>
+                    <button class="cat-btn" data-cat="fruits">🍎 과일/음식 (Food)</button>
+                    <button class="cat-btn" data-cat="colors">🎨 색상/모양 (Colors)</button>
+                    <button class="cat-btn" data-cat="school">✏️ 학교/물건 (School)</button>
+                </div>
+            </div>
+
+            <button id="start-btn" class="primary-btn pulse">🎮 게임 시작하기</button>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Top HUD Bar -->
+            <div id="hud">
+                <div class="hud-item">
+                    <span class="hud-label">STAGE</span>
+                    <span id="stage-val">1</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span id="score-val">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">COMBO</span>
+                    <span id="combo-val">0 🔥</span>
+                </div>
+                <button id="audio-toggle-btn" title="음성/소리 켜기/끄기">🔊</button>
+            </div>
+
+            <!-- Canvas Battle Arena -->
+            <div id="canvas-wrapper">
+                <canvas id="battle-canvas" width="800" height="340"></canvas>
+                
+                <!-- On-Canvas UI Overlays -->
+                <div id="word-card-overlay">
+                    <div id="monster-target-card">
+                        <div id="target-emoji">🐱</div>
+                        <div id="target-hint">고양이</div>
+                        <div id="word-display-box">
+                            <span id="word-typed"></span><span id="word-remaining">cat</span>
+                        </div>
+                        <button id="listen-word-btn" class="icon-btn" title="다시 듣기">🔊 다시 듣기</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Virtual Keyboard & Controls for Young Students -->
+            <div id="controls-section">
+                <div class="input-prompt">키보드로 단어를 치거나 아래 알파벳 버전을 눌러주세요!</div>
+                
+                <div id="virtual-keyboard">
+                    <!-- QWERTY Layout generated dynamically by JS -->
+                </div>
+
+                <div class="action-bar">
+                    <button id="hint-btn" class="sec-btn">💡 힌트 보기</button>
+                    <button id="speak-btn" class="sec-btn">🔊 발음 듣기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage Clear / Game Over Overlay -->
+        <div id="result-modal" class="modal">
+            <div class="modal-content">
+                <div id="modal-icon">🎉</div>
+                <h2 id="modal-title">STAGE CLEAR!</h2>
+                <p id="modal-message">훌륭한 마법사군요!</p>
+                <div class="stats-box">
+                    <div>맞힌 단어: <strong id="modal-words-count">0</strong>개</div>
+                    <div>획득 점수: <strong id="modal-score">0</strong>점</div>
+                    <div>최대 콤보: <strong id="modal-max-combo">0</strong>회</div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="next-stage-btn" class="primary-btn">다음 스테이지 ➡️</button>
+                    <button id="restart-btn" class="sec-btn">다시 하기 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
