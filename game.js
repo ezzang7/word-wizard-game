@@ -1,13 +1,15 @@
 // ========================================================
-// 단어 마법사 (Word Wizard RPG) - Instant Monster Defeat Engine
+// 단어 마법사 (Word Wizard RPG) - 10-Level S-Curve & Star Engine
 // ========================================================
 
-// 1. Wizard Rank Word Database
+// 1. 10 Playable Wizard Ranks (100-Level Vision, S-Curve Difficulty)
 const WIZARD_RANK_DATABASE = {
     rank1: {
-        title: '수습 마법사',
+        title: '견습 마법사',
+        icon: '📜',
+        desc: '3글자 파닉스 (5마리 / 완만한 속도)',
         monsterCount: 5,
-        speed: 0.25,
+        speed: 0.20,
         words: [
             { word: 'cat', hint: '고양이', emoji: '🐱' },
             { word: 'dog', hint: '개 / 강아지', emoji: '🐶' },
@@ -20,31 +22,42 @@ const WIZARD_RANK_DATABASE = {
             { word: 'cup', hint: '컵', emoji: '🥛' },
             { word: 'map', hint: '지도', emoji: '🗺️' },
             { word: 'hat', hint: '모자', emoji: '🎩' },
-            { word: 'net', hint: '그물 / 넷', emoji: '🕸️' },
-            { word: 'top', hint: '팽이 / 위', emoji: '🪀' },
+            { word: 'net', hint: '그물', emoji: '🕸️' },
+            { word: 'top', hint: '팽이', emoji: '🪀' },
             { word: 'bat', hint: '박쥐 / 방망이', emoji: '🦇' },
-            { word: 'bed', hint: '침대', emoji: '🛏️' },
-            { word: 'fox', hint: '여우', emoji: '🦊' },
-            { word: 'gem', hint: '보석', emoji: '💎' },
-            { word: 'jam', hint: '잼', emoji: '🫐' },
-            { word: 'fan', hint: '부채 / 선풍기', emoji: '🪭' },
-            { word: 'run', hint: '달리기', emoji: '🏃' }
+            { word: 'bed', hint: '침대', emoji: '🛏️' }
         ]
     },
     rank2: {
-        title: '원소 마법사',
-        monsterCount: 8,
-        speed: 0.45,
+        title: '기초 마법사',
+        icon: '🧹',
+        desc: '3~4글자 기초 단어 (6마리 / 기초 속도)',
+        monsterCount: 6,
+        speed: 0.25,
         words: [
+            { word: 'fox', hint: '여우', emoji: '🦊' },
+            { word: 'gem', hint: '보석', emoji: '💎' },
+            { word: 'jam', hint: '잼', emoji: '🫐' },
+            { word: 'run', hint: '달리기', emoji: '🏃' },
+            { word: 'sky', hint: '하늘', emoji: '🌌' },
             { word: 'book', hint: '책', emoji: '📖' },
             { word: 'milk', hint: '우유', emoji: '🥛' },
             { word: 'fish', hint: '물고기', emoji: '🐟' },
             { word: 'tree', hint: '나무', emoji: '🌳' },
             { word: 'star', hint: '별', emoji: '⭐️' },
+            { word: 'duck', hint: '오리', emoji: '🦆' },
+            { word: 'hand', hint: '손', emoji: '✋' }
+        ]
+    },
+    rank3: {
+        title: '원소 마법사',
+        icon: '🔮',
+        desc: '4글자 생활 어휘 (7마리 / 중간 속도)',
+        monsterCount: 7,
+        speed: 0.30,
+        words: [
             { word: 'blue', hint: '파란색', emoji: '🔵' },
             { word: 'pink', hint: '분홍색', emoji: '🩷' },
-            { word: 'duck', hint: '오리', emoji: '🦆' },
-            { word: 'hand', hint: '손', emoji: '✋' },
             { word: 'foot', hint: '발', emoji: '🦶' },
             { word: 'door', hint: '문', emoji: '🚪' },
             { word: 'frog', hint: '개구리', emoji: '🐸' },
@@ -54,42 +67,149 @@ const WIZARD_RANK_DATABASE = {
             { word: 'king', hint: '왕 / 국왕', emoji: '👑' },
             { word: 'ring', hint: '반지', emoji: '💍' },
             { word: 'snow', hint: '눈', emoji: '❄️' },
-            { word: 'bear', hint: '곰', emoji: '🐻' },
-            { word: 'lion', hint: '사자', emoji: '🦁' },
-            { word: 'wind', hint: '바람', emoji: '🌬️' },
-            { word: 'fire', hint: '불 / 불꽃', emoji: '🔥' }
+            { word: 'bear', hint: '곰', emoji: '🐻' }
         ]
     },
-    rank3: {
-        title: '대마법사',
-        monsterCount: 12,
-        speed: 0.65,
+    rank4: {
+        title: '수호 마법사',
+        icon: '🛡️',
+        desc: '4~5글자 일상 어휘 (8마리 / 가속 시작)',
+        monsterCount: 8,
+        speed: 0.35,
         words: [
+            { word: 'lion', hint: '사자', emoji: '🦁' },
+            { word: 'wind', hint: '바람', emoji: '🌬️' },
+            { word: 'fire', hint: '불 / 불꽃', emoji: '🔥' },
             { word: 'apple', hint: '사과', emoji: '🍎' },
             { word: 'bread', hint: '빵', emoji: '🍞' },
             { word: 'water', hint: '물', emoji: '💧' },
             { word: 'green', hint: '초록색', emoji: '🟢' },
             { word: 'clock', hint: '시계', emoji: '⏰' },
+            { word: 'train', hint: '기차', emoji: '🚂' },
+            { word: 'heart', hint: '하트', emoji: '❤️' }
+        ]
+    },
+    rank5: {
+        title: '번개 마법사',
+        icon: '⚡',
+        desc: '5글자 핵심 어휘 (9마리 / 빠른 속도)',
+        monsterCount: 9,
+        speed: 0.40,
+        words: [
             { word: 'rabbit', hint: '토끼', emoji: '🐰' },
-            { word: 'family', hint: '가족', emoji: '👨‍👩‍👧‍👦' },
-            { word: 'mother', hint: '엄마', emoji: '👩' },
-            { word: 'father', hint: '아빠', emoji: '👨' },
             { word: 'school', hint: '학교', emoji: '🏫' },
-            { word: 'pencil', hint: '연필', emoji: '✏️' },
-            { word: 'banana', hint: '바나나', emoji: '🍌' },
             { word: 'yellow', hint: '노란색', emoji: '🟡' },
             { word: 'monkey', hint: '원숭이', emoji: '🐒' },
-            { word: 'friend', hint: '친구', emoji: '🤝' },
-            { word: 'summer', hint: '여름', emoji: '☀️' },
-            { word: 'winter', hint: '겨울', emoji: '❄️' },
             { word: 'flower', hint: '꽃', emoji: '🌸' },
             { word: 'orange', hint: '오렌지', emoji: '🍊' },
             { word: 'animal', hint: '동물', emoji: '🐾' },
-            { word: 'dragon', hint: '드래곤 / 용', emoji: '🐲' },
+            { word: 'dragon', hint: '드래곤', emoji: '🐲' },
             { word: 'wizard', hint: '마법사', emoji: '🧙‍♂️' }
+        ]
+    },
+    rank6: {
+        title: '빙결 마법사',
+        icon: '❄️',
+        desc: '5~6글자 고급 어휘 (10마리 / 고속)',
+        monsterCount: 10,
+        speed: 0.48,
+        words: [
+            { word: 'family', hint: '가족', emoji: '👨‍👩‍👧‍👦' },
+            { word: 'mother', hint: '엄마', emoji: '👩' },
+            { word: 'father', hint: '아빠', emoji: '👨' },
+            { word: 'pencil', hint: '연필', emoji: '✏️' },
+            { word: 'banana', hint: '바나나', emoji: '🍌' },
+            { word: 'friend', hint: '친구', emoji: '🤝' },
+            { word: 'summer', hint: '여름', emoji: '☀️' },
+            { word: 'winter', hint: '겨울', emoji: '❄️' },
+            { word: 'garden', hint: '정원', emoji: '🏡' }
+        ]
+    },
+    rank7: {
+        title: '별빛 마법사',
+        icon: '🌟',
+        desc: '6글자 교과 필수 어휘 (11마리 / 급경사 시작)',
+        monsterCount: 11,
+        speed: 0.56,
+        words: [
+            { word: 'castle', hint: '성 / 성곽', emoji: '🏰' },
+            { word: 'planet', hint: '행성', emoji: '🪐' },
+            { word: 'rocket', hint: '로켓', emoji: '🚀' },
+            { word: 'shadow', hint: '그림자', emoji: '👤' },
+            { word: 'silver', hint: '은색 / 은', emoji: '🥈' },
+            { word: 'purple', hint: '보라색', emoji: '💜' },
+            { word: 'camera', hint: '카메라', emoji: '📷' },
+            { word: 'doctor', hint: '의사', emoji: '👨‍⚕️' }
+        ]
+    },
+    rank8: {
+        title: '용 마법사',
+        icon: '🐉',
+        desc: '6~7글자 도전자 어휘 (12마리 / 초고속)',
+        monsterCount: 12,
+        speed: 0.65,
+        words: [
+            { word: 'monster', hint: '괴물 / 몬스터', emoji: '👾' },
+            { word: 'rainbow', hint: '무지개', emoji: '🌈' },
+            { word: 'diamond', hint: '다이아몬드', emoji: '💎' },
+            { word: 'captain', hint: '선장 / 캡틴', emoji: '👨‍✈️' },
+            { word: 'freedom', hint: '자유', emoji: '🕊️' },
+            { word: 'brother', hint: '형제 / 남동생', emoji: '👦' },
+            { word: 'sister', hint: '자매 / 여동생', emoji: '👧' }
+        ]
+    },
+    rank9: {
+        title: '시공 마법사',
+        icon: '🌌',
+        desc: '7~8글자 영웅 어휘 (14마리 / 수퍼 스피드)',
+        monsterCount: 14,
+        speed: 0.75,
+        words: [
+            { word: 'dinosaur', hint: '공룡', emoji: '🦖' },
+            { word: 'universe', hint: '우주', emoji: '🌌' },
+            { word: 'treasure', hint: '보물', emoji: '🪙' },
+            { word: 'hospital', hint: '병원', emoji: '🏥' },
+            { word: 'building', hint: '빌딩 / 건물', emoji: '🏢' },
+            { word: 'computer', hint: '컴퓨터', emoji: '💻' },
+            { word: 'elephant', hint: '코끼리', emoji: '🐘' }
+        ]
+    },
+    rank10: {
+        title: '대마법사',
+        icon: '👑',
+        desc: '8글자+ 마스터 어휘 (15마리 / 한계 도전자)',
+        monsterCount: 15,
+        speed: 0.85,
+        words: [
+            { word: 'adventure', hint: '모험', emoji: '🗺️' },
+            { word: 'beautiful', hint: '아름다운', emoji: '✨' },
+            { word: 'butterfly', hint: '나비', emoji: '🦋' },
+            { word: 'sunshine', hint: '햇살', emoji: '☀️' },
+            { word: 'chocolate', hint: '초콜릿', emoji: '🍫' },
+            { word: 'challenge', hint: '도전', emoji: '🎯' },
+            { word: 'champion', hint: '챔피언 / 1위', emoji: '🏆' }
         ]
     }
 };
+
+// Diverse 15 Monster Catalog
+const MONSTER_CATALOG = [
+    { emoji: '👾', name: '외계 슬라임' },
+    { emoji: '👻', name: '유령 구체' },
+    { emoji: '👹', name: '오니 도깨비' },
+    { emoji: '🐲', name: '드래곤 나이트' },
+    { emoji: '🧟', name: '좀비 괴수' },
+    { emoji: '🧌', name: '바위 트롤' },
+    { emoji: '🪼', name: '심해 해파리' },
+    { emoji: '👺', name: '화염 텐구' },
+    { emoji: '🧛', name: '흡혈귀 뱀파이어' },
+    { emoji: '🔮', name: '마력 미믹' },
+    { emoji: '🕷️', name: '독거미 마수' },
+    { emoji: '🦇', name: '박쥐 서큐버스' },
+    { emoji: '🐺', name: '암흑 늑대' },
+    { emoji: '💀', name: '스켈레톤 킹' },
+    { emoji: '🐙', name: '심해 크라켄' }
+];
 
 // 2. LocalStorage Persistence Manager
 class SaveSystem {
@@ -122,7 +242,61 @@ class SaveSystem {
     }
 }
 
-// 3. Sound Synthesizer
+// 3. Global Leaderboard Manager
+class LeaderboardSystem {
+    static STORAGE_KEY = 'word_wizard_global_leaderboard';
+
+    static DEFAULT_HALL_OF_FAME = [
+        { name: '지우', avatar: '🧙‍♂️', score: 48500, rankTitle: '대마법사' },
+        { name: '수아', avatar: '🧙‍♀️', score: 36400, rankTitle: '용 마법사' },
+        { name: '현우', avatar: '🧝‍♂️', score: 28900, rankTitle: '빙결 마법사' },
+        { name: '서연', avatar: '🧙‍♀️', score: 19200, rankTitle: '수호 마법사' },
+        { name: '하준', avatar: '🧙‍♂️', score: 12800, rankTitle: '원소 마법사' }
+    ];
+
+    static getLeaderboard() {
+        try {
+            const data = localStorage.getItem(LeaderboardSystem.STORAGE_KEY);
+            if (data) {
+                return JSON.parse(data);
+            }
+        } catch (e) {
+            console.error('Failed to get leaderboard:', e);
+        }
+        return [...LeaderboardSystem.DEFAULT_HALL_OF_FAME];
+    }
+
+    static submitScore(playerName, avatar, score, unlockedLevel) {
+        if (!playerName || score <= 0) return;
+
+        const rankInfo = WIZARD_RANK_DATABASE[`rank${Math.min(unlockedLevel, 10)}`] || WIZARD_RANK_DATABASE.rank1;
+        const rankTitle = rankInfo.title;
+
+        let list = LeaderboardSystem.getLeaderboard();
+
+        const existingIdx = list.findIndex(item => item.name === playerName);
+        if (existingIdx !== -1) {
+            if (score > list[existingIdx].score) {
+                list[existingIdx].score = score;
+                list[existingIdx].avatar = avatar;
+                list[existingIdx].rankTitle = rankTitle;
+            }
+        } else {
+            list.push({ name: playerName, avatar: avatar, score: score, rankTitle: rankTitle });
+        }
+
+        list.sort((a, b) => b.score - a.score);
+        list = list.slice(0, 15);
+
+        try {
+            localStorage.setItem(LeaderboardSystem.STORAGE_KEY, JSON.stringify(list));
+        } catch (e) {
+            console.error('Failed to save leaderboard:', e);
+        }
+    }
+}
+
+// 4. Sound Synthesizer
 class SoundFx {
     constructor() {
         this.ctx = null;
@@ -285,7 +459,7 @@ class SoundFx {
     }
 }
 
-// 4. Main Game Application
+// 5. Main Game Application
 class WordWizardGame {
     constructor() {
         this.player = {
@@ -294,7 +468,7 @@ class WordWizardGame {
             avatarTitle: '불꽃 마법사',
             cumulativeScore: 0,
             unlockedLevel: 1,
-            levelStars: { 1: 0, 2: 0, 3: 0 }
+            levelStars: {} // { 1: 3, 2: 2, ... }
         };
 
         this.currentLevel = 1;
@@ -334,6 +508,7 @@ class WordWizardGame {
         this.levelSelectScreen = document.getElementById('level-select-screen');
         this.gameScreen = document.getElementById('game-screen');
         this.resultModal = document.getElementById('result-modal');
+        this.leaderboardModal = document.getElementById('leaderboard-modal');
 
         this.profileFormBox = document.getElementById('profile-form-box');
         this.savedProfileCard = document.getElementById('saved-profile-card');
@@ -407,6 +582,17 @@ class WordWizardGame {
             this.profileFormBox.classList.remove('hidden');
         });
 
+        ['open-leaderboard-btn-1', 'open-leaderboard-btn-2', 'open-leaderboard-btn-3', 'view-rank-result-btn'].forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.addEventListener('click', () => this.openLeaderboard());
+            }
+        });
+
+        document.getElementById('close-leaderboard-btn').addEventListener('click', () => {
+            this.leaderboardModal.classList.remove('active');
+        });
+
         document.getElementById('reset-data-btn').addEventListener('click', () => {
             if (confirm('저장된 마법사 정보와 점수를 초기화할까요?')) {
                 SaveSystem.resetProfile();
@@ -417,17 +603,6 @@ class WordWizardGame {
         document.getElementById('back-to-profile-btn').addEventListener('click', () => {
             this.showScreen(this.profileScreen);
             this.checkSavedProfile();
-        });
-
-        document.querySelectorAll('.level-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const lvl = parseInt(card.dataset.level);
-                if (lvl <= this.player.unlockedLevel) {
-                    this.startLevelGame(lvl);
-                } else {
-                    alert(`이 계급 시험은 아직 잠겨있어요! 이전 계급을 먼저 통과해 주세요! 🔒`);
-                }
-            });
         });
 
         const audioBtn = document.getElementById('audio-toggle-btn');
@@ -447,10 +622,10 @@ class WordWizardGame {
 
         document.getElementById('next-stage-btn').addEventListener('click', () => {
             this.resultModal.classList.remove('active');
-            if (this.currentLevel < 3) {
+            if (this.currentLevel < 10) {
                 this.startLevelGame(this.currentLevel + 1);
             } else {
-                alert('🏆 최고 계급 대마법사 시험을 마스터하셨습니다! 축하합니다!');
+                alert('🏆 10레벨 최고 계급 대마법사 시험을 통과하셨습니다! 당신은 전설의 대마법사입니다!');
                 this.openLevelSelectMap();
             }
         });
@@ -473,16 +648,61 @@ class WordWizardGame {
         const saved = SaveSystem.getProfile();
         if (saved && saved.name) {
             this.player = saved;
+            if (!this.player.levelStars) this.player.levelStars = {};
             document.getElementById('saved-avatar').textContent = this.player.avatar;
             document.getElementById('saved-name').textContent = `${this.player.name} 마법사`;
             document.getElementById('saved-total-score').textContent = this.player.cumulativeScore.toLocaleString();
 
             this.profileFormBox.classList.add('hidden');
             this.savedProfileCard.classList.remove('hidden');
+
+            LeaderboardSystem.submitScore(this.player.name, this.player.avatar, this.player.cumulativeScore, this.player.unlockedLevel);
         } else {
             this.profileFormBox.classList.remove('hidden');
             this.savedProfileCard.classList.add('hidden');
         }
+    }
+
+    openLeaderboard() {
+        if (this.player && this.player.name) {
+            LeaderboardSystem.submitScore(this.player.name, this.player.avatar, this.player.cumulativeScore, this.player.unlockedLevel);
+        }
+
+        const list = LeaderboardSystem.getLeaderboard();
+        const listBox = document.getElementById('leaderboard-list');
+        listBox.innerHTML = '';
+
+        let myRank = '순위 밖';
+
+        list.forEach((item, index) => {
+            const rankNum = index + 1;
+            const isMe = this.player && (item.name === this.player.name);
+            if (isMe) myRank = `${rankNum}위`;
+
+            let medal = `${rankNum}위`;
+            let topClass = '';
+            if (rankNum === 1) { medal = '🥇 1위'; topClass = 'top1'; }
+            else if (rankNum === 2) { medal = '🥈 2위'; topClass = 'top2'; }
+            else if (rankNum === 3) { medal = '🥉 3위'; topClass = 'top3'; }
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = `rank-item ${topClass} ${isMe ? 'is-me' : ''}`;
+            itemDiv.innerHTML = `
+                <div class="rank-left">
+                    <span class="rank-number">${medal}</span>
+                    <div class="rank-player-info">
+                        <span>${item.avatar}</span>
+                        <span class="rank-player-name">${item.name}</span>
+                        <span class="rank-title-badge">${item.rankTitle || '마법사'}</span>
+                    </div>
+                </div>
+                <div class="rank-score">${item.score.toLocaleString()}점</div>
+            `;
+            listBox.appendChild(itemDiv);
+        });
+
+        document.getElementById('my-rank-text').textContent = this.player && this.player.name ? `${this.player.name} 마법사 (${myRank})` : '프로필을 등록해주세요';
+        this.leaderboardModal.classList.add('active');
     }
 
     showScreen(targetScreen) {
@@ -490,6 +710,7 @@ class WordWizardGame {
         targetScreen.classList.add('active');
     }
 
+    // Render 10 Level Cards Grid dynamically
     openLevelSelectMap() {
         this.showScreen(this.levelSelectScreen);
 
@@ -497,25 +718,44 @@ class WordWizardGame {
         document.getElementById('map-user-name').textContent = `${this.player.name} 마법사`;
         document.getElementById('map-user-score').textContent = this.player.cumulativeScore.toLocaleString();
 
-        const rankTitles = ['수습 마법사', '원소 마법사', '대마법사'];
+        const gridContainer = document.getElementById('level-grid-container');
+        gridContainer.innerHTML = '';
 
-        for (let lvl = 1; lvl <= 3; lvl++) {
-            const card = document.querySelector(`.level-card[data-level="${lvl}"]`);
-            const statusText = card.querySelector('.level-status');
-            const starsBox = document.getElementById(`stars-lvl-${lvl}`);
+        for (let lvl = 1; lvl <= 10; lvl++) {
+            const rankData = WIZARD_RANK_DATABASE[`rank${lvl}`];
+            const isUnlocked = lvl <= this.player.unlockedLevel;
+            const starsCount = (this.player.levelStars && this.player.levelStars[lvl]) || 0;
 
-            if (lvl <= this.player.unlockedLevel) {
-                card.classList.remove('locked');
-                card.classList.add('unlocked');
-                statusText.innerHTML = '🔓 도전 가능';
-            } else {
-                card.classList.remove('unlocked');
-                card.classList.add('locked');
-                statusText.innerHTML = `🔒 ${rankTitles[lvl - 2]} 통과시 열림`;
-            }
+            const card = document.createElement('div');
+            card.className = `level-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+            card.dataset.level = lvl;
 
-            const starsCount = this.player.levelStars[lvl] || 0;
-            starsBox.textContent = '⭐'.repeat(starsCount) + '☆'.repeat(3 - starsCount);
+            const starsDisplay = isUnlocked 
+                ? '⭐'.repeat(starsCount) + '☆'.repeat(3 - starsCount)
+                : '☆☆☆';
+
+            const statusText = isUnlocked 
+                ? '🔓 도전 가능' 
+                : `🔒 ${WIZARD_RANK_DATABASE[`rank${lvl-1}`]?.title || '이전 계급'} 통과시 열림`;
+
+            card.innerHTML = `
+                <div class="level-badge">LV.${lvl} ${rankData.title}</div>
+                <div class="level-icon">${rankData.icon}</div>
+                <h3>${rankData.title}</h3>
+                <p class="level-desc">${rankData.desc}</p>
+                <div class="level-status">${statusText}</div>
+                <div class="star-rating">${starsDisplay}</div>
+            `;
+
+            card.addEventListener('click', () => {
+                if (isUnlocked) {
+                    this.startLevelGame(lvl);
+                } else {
+                    alert(`이 계급 시험은 아직 잠겨있어요! 이전 계급 시험을 먼저 통과해 주세요! 🔒`);
+                }
+            });
+
+            gridContainer.appendChild(card);
         }
     }
 
@@ -565,16 +805,14 @@ class WordWizardGame {
         this.monster.x = 640;
         this.monster.hp = 100;
         this.monster.maxHp = 100;
-        this.monster.emoji = this.getMonsterEmoji();
+
+        // Select diverse monster emoji from catalog
+        const monsterItem = MONSTER_CATALOG[(this.currentLevel + this.currentWordIndex) % MONSTER_CATALOG.length];
+        this.monster.emoji = monsterItem.emoji;
         this.monster.speed = rankInfo.speed;
-        this.monster.visible = true; // Make monster visible again for next word
+        this.monster.visible = true;
 
         this.speakWord();
-    }
-
-    getMonsterEmoji() {
-        const monsters = ['👾', '👻', '👹', '🐲', '🧟', '🧌', '🪼', '👺'];
-        return monsters[(this.currentLevel + this.currentWordIndex) % monsters.length];
     }
 
     updateWordDisplay() {
@@ -668,26 +906,20 @@ class WordWizardGame {
         });
     }
 
-    // Called ON IMPACT when missile reaches monster!
     handleProjectileImpact(p) {
         if (p.isFinalHit) {
-            // INSTANTLY HIDE MONSTER AT THE EXACT MILLISECOND OF IMPACT!
             this.monster.visible = false;
-
-            // 💣 Heavy "KWANG~!" Explosion Sound RIGHT ON IMPACT!
             this.soundFx.playMonsterDefeat();
             this.spawnExplosion(p.x, p.y, true);
 
             this.monstersDefeatedInWave++;
             this.updateHUD();
 
-            // Next monster appears after explosion effect finishes
             setTimeout(() => {
                 this.currentWordIndex++;
                 this.spawnNextWordMonster();
             }, 550);
         } else {
-            // Normal hit sound on impact
             this.soundFx.playHitImpact();
             this.spawnExplosion(p.x, p.y, false);
         }
@@ -737,35 +969,47 @@ class WordWizardGame {
         }
     }
 
+    // Star Rating Logic: ⭐(Clear), ⭐⭐(Combo >= 60%), ⭐⭐⭐(Perfect 100%)
     handleLevelClear() {
         this.player.cumulativeScore += this.stageScore;
 
-        if (this.currentLevel < 3 && this.player.unlockedLevel < this.currentLevel + 1) {
+        if (this.currentLevel < 10 && this.player.unlockedLevel < this.currentLevel + 1) {
             this.player.unlockedLevel = this.currentLevel + 1;
         }
 
-        const stars = this.maxCombo >= 8 ? 3 : (this.maxCombo >= 4 ? 2 : 1);
+        // Calculate Stars
+        let stars = 1;
+        if (this.maxCombo >= this.totalMonstersInWave) {
+            stars = 3; // Perfect 100%
+        } else if (this.maxCombo >= Math.floor(this.totalMonstersInWave * 0.6)) {
+            stars = 2; // Good combo
+        }
+
+        if (!this.player.levelStars) this.player.levelStars = {};
         if ((this.player.levelStars[this.currentLevel] || 0) < stars) {
             this.player.levelStars[this.currentLevel] = stars;
         }
 
         SaveSystem.saveProfile(this.player);
 
+        LeaderboardSystem.submitScore(this.player.name, this.player.avatar, this.player.cumulativeScore, this.player.unlockedLevel);
+
         this.launchFireworks();
 
-        const rankTitles = ['수습 마법사', '원소 마법사', '대마법사'];
-        document.getElementById('modal-title').textContent = `${rankTitles[this.currentLevel - 1]} 통과!`;
+        const rankData = WIZARD_RANK_DATABASE[`rank${this.currentLevel}`];
+        document.getElementById('modal-title').textContent = `${rankData.title} 통과!`;
         document.getElementById('modal-icon').textContent = '🎆🎉';
-        document.getElementById('modal-message').textContent = '축하합니다! 시험을 완벽하게 통과하셨습니다!';
+        document.getElementById('modal-message').textContent = '축하합니다! 승급 시험을 완벽하게 통과하셨습니다!';
+        document.getElementById('modal-stars-award').textContent = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
         document.getElementById('modal-score').textContent = this.stageScore;
         document.getElementById('modal-total-score').textContent = this.player.cumulativeScore.toLocaleString();
         document.getElementById('modal-max-combo').textContent = this.maxCombo;
 
         const nextBtn = document.getElementById('next-stage-btn');
-        if (this.currentLevel >= 3) {
-            nextBtn.textContent = '🏆 최고 계급 달성!';
+        if (this.currentLevel >= 10) {
+            nextBtn.textContent = '🏆 전설의 대마법사 달성!';
         } else {
-            nextBtn.textContent = `다음 계급 시험 도전 ➡️`;
+            nextBtn.textContent = `레벨 ${this.currentLevel + 1} 시험 도전 ➡️`;
         }
 
         setTimeout(() => {
@@ -779,7 +1023,6 @@ class WordWizardGame {
         this.drawBackground();
         this.drawWizard();
 
-        // Draw monster only if visible
         if (this.currentWordObj && this.monster.visible) {
             this.monster.x -= this.monster.speed;
             if (this.monster.x < this.wizard.x + 70) {
@@ -788,7 +1031,6 @@ class WordWizardGame {
             this.drawMonster();
         }
 
-        // Update Projectiles
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
             const p = this.projectiles[i];
             p.x += p.speed;

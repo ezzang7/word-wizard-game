@@ -3,6 +3,7 @@
     --primary-light: #A29BFE;
     --accent-color: #FD79A8;
     --yellow-star: #FFEAA7;
+    --gold-gradient: linear-gradient(135deg, #FDCB6E 0%, #E17055 100%);
     --bg-dark: #1E1E2E;
     --card-bg: rgba(255, 255, 255, 0.95);
     --text-dark: #2D3436;
@@ -30,7 +31,7 @@ body {
 #game-container {
     width: 100%;
     max-width: 880px;
-    height: 700px;
+    height: 720px;
     background: #252836;
     border-radius: 24px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(108, 92, 231, 0.3);
@@ -194,14 +195,51 @@ body {
     margin-top: 6px;
 }
 
-.profile-actions {
+.form-buttons, .profile-actions {
     display: flex;
     gap: 12px;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* 2. Level Select Screen */
+/* Gold Buttons */
+.gold-btn {
+    background: linear-gradient(135deg, #FDCB6E 0%, #E17055 100%);
+    border: none;
+    color: #2D3436;
+    padding: 12px 24px;
+    font-size: 1.25rem;
+    font-family: 'Jua', sans-serif;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #D63031, 0 8px 15px rgba(253, 203, 110, 0.4);
+    transition: transform 0.1s ease;
+}
+
+.gold-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #D63031;
+}
+
+.gold-btn-small {
+    background: linear-gradient(135deg, #FDCB6E 0%, #E17055 100%);
+    border: none;
+    color: #2D3436;
+    padding: 6px 14px;
+    font-size: 0.95rem;
+    font-family: 'Jua', sans-serif;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #D63031;
+}
+
+.gold-btn-small:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #D63031;
+}
+
+/* 2. Level Select Screen & 10-Level Scrollable Grid */
 #level-select-screen {
     background: #1E202E;
     justify-content: space-between;
@@ -212,13 +250,13 @@ body {
     justify-content: space-between;
     align-items: center;
     background: #252836;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border-radius: 16px;
     border: 2px solid #3F445B;
 }
 
 .user-pill {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -226,8 +264,14 @@ body {
 }
 
 .score-pill {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: #74B9FF;
+}
+
+.top-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .icon-btn-small {
@@ -243,31 +287,48 @@ body {
 
 .map-title-box {
     text-align: center;
-    margin: 10px 0;
+    margin: 6px 0;
 }
 
 .map-title-box h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #FFEAA7;
 }
 
 .map-title-box p {
     color: #A29BFE;
-    font-size: 1.1rem;
+    font-size: 1rem;
+}
+
+/* Scrollable Level Grid Wrapper */
+.level-grid-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 4px;
+    margin-bottom: 10px;
+}
+
+.level-grid-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.level-grid-wrapper::-webkit-scrollbar-thumb {
+    background: #6C5CE7;
+    border-radius: 4px;
 }
 
 .level-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 14px;
     width: 100%;
 }
 
 .level-card {
     background: #2B2F44;
     border: 3px solid #3A3F58;
-    border-radius: 20px;
-    padding: 20px 16px;
+    border-radius: 18px;
+    padding: 16px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -280,46 +341,47 @@ body {
     background: linear-gradient(180deg, #3A3F58 0%, #2B2F44 100%);
     border-color: #6C5CE7;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
 }
 
 .level-card.unlocked:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     border-color: #FFEAA7;
-    box-shadow: 0 12px 25px rgba(108, 92, 231, 0.5);
+    box-shadow: 0 10px 22px rgba(108, 92, 231, 0.5);
 }
 
 .level-card.locked {
-    opacity: 0.6;
-    filter: grayscale(0.5);
+    opacity: 0.55;
+    filter: grayscale(0.6);
     cursor: not-allowed;
 }
 
 .level-badge {
     background: #6C5CE7;
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     padding: 2px 10px;
     border-radius: 12px;
     font-family: 'Fredoka', cursive;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .level-icon {
-    font-size: 3rem;
-    margin: 4px 0;
+    font-size: 2.6rem;
+    margin: 2px 0;
 }
 
 .level-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #FFF;
     margin-bottom: 4px;
 }
 
 .level-desc {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #A0A5BD;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 .level-status {
@@ -332,8 +394,8 @@ body {
 }
 
 .star-rating {
-    font-size: 1.2rem;
-    margin-top: 6px;
+    font-size: 1.15rem;
+    margin-top: 4px;
 }
 
 /* Primary / Secondary Buttons */
@@ -341,17 +403,17 @@ body {
     background: linear-gradient(185deg, #FF7675 0%, #D63031 100%);
     border: none;
     color: white;
-    padding: 14px 40px;
-    font-size: 1.4rem;
+    padding: 12px 36px;
+    font-size: 1.35rem;
     font-family: 'Jua', sans-serif;
     border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0 6px 0 #9E2A2B, 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 0 #9E2A2B, 0 8px 15px rgba(0,0,0,0.3);
     transition: transform 0.1s ease;
 }
 
 .primary-btn:active {
-    transform: translateY(4px);
+    transform: translateY(3px);
     box-shadow: 0 2px 0 #9E2A2B;
 }
 
@@ -570,11 +632,11 @@ body {
     display: none;
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 15, 26, 0.85);
+    background: rgba(15, 15, 26, 0.88);
     z-index: 100;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
 }
 
 .modal.active {
@@ -587,9 +649,121 @@ body {
     border-radius: 24px;
     padding: 24px 36px;
     text-align: center;
-    max-width: 440px;
+    max-width: 460px;
     width: 90%;
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+/* Leaderboard Modal Styling */
+.leaderboard-modal-content {
+    max-width: 520px;
+    padding: 24px 28px;
+}
+
+.leaderboard-header h2 {
+    color: #FFEAA7;
+    font-size: 1.8rem;
+}
+
+.leaderboard-header p {
+    color: #A29BFE;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.leaderboard-list-box {
+    background: #1E202E;
+    border-radius: 16px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 2px solid #3F445B;
+}
+
+.star-award-box {
+    font-size: 2.2rem;
+    margin: 8px 0;
+    letter-spacing: 6px;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2B2F44;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.rank-item.top1 {
+    background: linear-gradient(135deg, rgba(253, 203, 110, 0.25) 0%, rgba(225, 112, 85, 0.25) 100%);
+    border: 2px solid #FDCB6E;
+}
+
+.rank-item.top2 {
+    background: rgba(223, 230, 233, 0.15);
+    border: 1px solid #DFE6E9;
+}
+
+.rank-item.top3 {
+    background: rgba(225, 112, 85, 0.15);
+    border: 1px solid #E17055;
+}
+
+.rank-item.is-me {
+    box-shadow: 0 0 12px #6C5CE7;
+    border: 2px solid #A29BFE;
+}
+
+.rank-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rank-number {
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 32px;
+    text-align: center;
+}
+
+.rank-player-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rank-player-name {
+    color: #FFF;
+}
+
+.rank-title-badge {
+    background: #6C5CE7;
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+}
+
+.rank-score {
+    color: #FFEAA7;
+    font-weight: bold;
+}
+
+.my-rank-banner {
+    background: #3A3F58;
+    color: #FFEAA7;
+    padding: 8px 16px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+    font-size: 1.1rem;
 }
 
 #modal-icon {
@@ -606,14 +780,14 @@ body {
 #modal-message {
     color: #DFE6E9;
     font-size: 1.15rem;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .stats-box {
     background: #1E202E;
     padding: 12px;
     border-radius: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     line-height: 1.8;
     font-size: 1.1rem;
 }
@@ -621,5 +795,5 @@ body {
 .modal-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
