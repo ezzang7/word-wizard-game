@@ -3,49 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>단어 마법사 (Word Wizard RPG) - 초등 영어 게임</title>
+    <title>단어 마법사 (Word Wizard RPG)</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gamja+Flower&family=Fredoka:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="game-container">
-        <!-- Start Screen -->
-        <div id="start-screen" class="screen active">
+        <!-- 1. Profile Creation / Select Screen -->
+        <div id="profile-screen" class="screen active">
             <div class="logo-box">
                 <span class="magic-sparkle">✨</span>
                 <h1>단어 마법사</h1>
-                <p class="subtitle">Word Wizard RPG</p>
-                <div class="grade-badge">초등 저학년 추천 🌟</div>
+                <p class="subtitle">Word Wizard RPG - 마법사 승급 모험</p>
             </div>
 
-            <div class="character-preview">
-                <div class="wizard-avatar-large">🧙‍♂️</div>
-                <div class="preview-dialog">"주문(영단어)을 외워서 몬스터를 퇴치하자!"</div>
+            <!-- Profile Form -->
+            <div id="profile-form-box" class="card-box">
+                <h3>🧙 마법사 이름을 입력하고 아바타를 골라주세요!</h3>
+                <input type="text" id="player-name-input" placeholder="마법사 이름 (예: 민준)" maxlength="10">
+
+                <div class="avatar-selection">
+                    <div class="avatar-option active" data-avatar="🧙‍♂️" data-title="불꽃 마법사">
+                        <span class="avatar-emoji">🧙‍♂️</span>
+                        <span class="avatar-title">불꽃 마법사</span>
+                    </div>
+                    <div class="avatar-option" data-avatar="🧙‍♀️" data-title="빛의 마법사">
+                        <span class="avatar-emoji">🧙‍♀️</span>
+                        <span class="avatar-title">빛의 마법사</span>
+                    </div>
+                    <div class="avatar-option" data-avatar="🧝‍♂️" data-title="번개 마법사">
+                        <span class="avatar-emoji">🧝‍♂️</span>
+                        <span class="avatar-title">번개 마법사</span>
+                    </div>
+                </div>
+
+                <button id="save-profile-btn" class="primary-btn pulse">✨ 모험 시작하기</button>
             </div>
 
-            <div class="category-select">
-                <h3>학습할 단어 주제 선택</h3>
-                <div class="category-grid">
-                    <button class="cat-btn active" data-cat="animals">🐱 동물 (Animals)</button>
-                    <button class="cat-btn" data-cat="fruits">🍎 과일/음식 (Food)</button>
-                    <button class="cat-btn" data-cat="colors">🎨 색상/모양 (Colors)</button>
-                    <button class="cat-btn" data-cat="school">✏️ 학교/물건 (School)</button>
+            <!-- Saved Profile Card -->
+            <div id="saved-profile-card" class="card-box hidden">
+                <div class="profile-header">
+                    <span id="saved-avatar" class="avatar-emoji-large">🧙‍♂️</span>
+                    <div class="profile-info">
+                        <h2 id="saved-name">민준 마법사</h2>
+                        <div class="score-badge">🏆 총 누적 점수: <strong id="saved-total-score">0</strong>점</div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button id="continue-game-btn" class="primary-btn">🎮 모험 계속하기</button>
+                    <button id="edit-profile-btn" class="sec-btn">✏️ 프로필 변경</button>
                 </div>
             </div>
-
-            <button id="start-btn" class="primary-btn pulse">🎮 게임 시작하기</button>
         </div>
 
-        <!-- Main Game Screen -->
+        <!-- 2. Wizard Rank / World Map Screen -->
+        <div id="level-select-screen" class="screen">
+            <div class="top-profile-bar">
+                <div class="user-pill">
+                    <span id="map-user-avatar">🧙‍♂️</span>
+                    <span id="map-user-name">민준 마법사</span>
+                </div>
+                <div class="score-pill">
+                    🏆 누적 점수: <span id="map-user-score">0</span>점
+                </div>
+                <button id="reset-data-btn" class="icon-btn-small" title="기록 초기화">🔄 초기화</button>
+            </div>
+
+            <div class="map-title-box">
+                <h2>🌟 마법사 승급 시험 맵 🌟</h2>
+                <p>계급을 높여 최고 경지의 대마법사에 도전하세요!</p>
+            </div>
+
+            <!-- Level Cards Grid -->
+            <div class="level-grid">
+                <!-- Rank 1 Card -->
+                <div class="level-card unlocked" data-level="1">
+                    <div class="level-badge">RANK 1</div>
+                    <div class="level-icon">📜</div>
+                    <h3>수습 마법사</h3>
+                    <p class="level-desc">3글자 파닉스 (5개 몬스터 / 여유로운 속도)</p>
+                    <div class="level-status">🔓 도전 가능</div>
+                    <div class="star-rating" id="stars-lvl-1">⭐⭐⭐</div>
+                </div>
+
+                <!-- Rank 2 Card -->
+                <div class="level-card locked" data-level="2">
+                    <div class="level-badge">RANK 2</div>
+                    <div class="level-icon">🔮</div>
+                    <h3>원소 마법사</h3>
+                    <p class="level-desc">4글자 필수 어휘 (8개 몬스터 / 중간 속도)</p>
+                    <div class="level-status">🔒 수습 마법사 통과시 열림</div>
+                    <div class="star-rating" id="stars-lvl-2">☆☆☆</div>
+                </div>
+
+                <!-- Rank 3 Card -->
+                <div class="level-card locked" data-level="3">
+                    <div class="level-badge">RANK 3</div>
+                    <div class="level-icon">👑</div>
+                    <h3>대마법사</h3>
+                    <p class="level-desc">5글자+ 고급 어휘 (12개 몬스터 / 빠른 속도)</p>
+                    <div class="level-status">🔒 원소 마법사 통과시 열림</div>
+                    <div class="star-rating" id="stars-lvl-3">☆☆☆</div>
+                </div>
+            </div>
+
+            <button id="back-to-profile-btn" class="sec-btn">⬅️ 프로필로 이동</button>
+        </div>
+
+        <!-- 3. Main Battle Screen -->
         <div id="game-screen" class="screen">
-            <!-- Top HUD Bar -->
             <div id="hud">
                 <div class="hud-item">
-                    <span class="hud-label">STAGE</span>
-                    <span id="stage-val">1</span>
+                    <span id="hud-avatar">🧙‍♂️</span>
+                    <span id="hud-player-name">민준</span>
                 </div>
                 <div class="hud-item">
-                    <span class="hud-label">SCORE</span>
+                    <span class="hud-label">계급</span>
+                    <span id="stage-val">수습 마법사</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">남은 몬스터</span>
+                    <span id="monsters-left-val">5 / 5</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">이번 판 점수</span>
                     <span id="score-val">0</span>
                 </div>
                 <div class="hud-item">
@@ -57,9 +138,9 @@
 
             <!-- Canvas Battle Arena -->
             <div id="canvas-wrapper">
-                <canvas id="battle-canvas" width="800" height="340"></canvas>
+                <canvas id="battle-canvas" width="800" height="320"></canvas>
                 
-                <!-- On-Canvas UI Overlays -->
+                <!-- Target Monster Card -->
                 <div id="word-card-overlay">
                     <div id="monster-target-card">
                         <div id="target-emoji">🐱</div>
@@ -72,35 +153,32 @@
                 </div>
             </div>
 
-            <!-- Virtual Keyboard & Controls for Young Students -->
+            <!-- Keyboard & Controls -->
             <div id="controls-section">
-                <div class="input-prompt">키보드로 단어를 치거나 아래 알파벳 버전을 눌러주세요!</div>
-                
-                <div id="virtual-keyboard">
-                    <!-- QWERTY Layout generated dynamically by JS -->
-                </div>
-
+                <div class="input-prompt">키보드 또는 아래 자판을 눌러 영단어를 완벽히 마법 주문으로 완성하세요!</div>
+                <div id="virtual-keyboard"></div>
                 <div class="action-bar">
                     <button id="hint-btn" class="sec-btn">💡 힌트 보기</button>
                     <button id="speak-btn" class="sec-btn">🔊 발음 듣기</button>
+                    <button id="exit-game-btn" class="sec-btn danger-btn">🚪 맵으로 나가기</button>
                 </div>
             </div>
         </div>
 
-        <!-- Stage Clear / Game Over Overlay -->
+        <!-- Stage Clear Result Modal -->
         <div id="result-modal" class="modal">
             <div class="modal-content">
                 <div id="modal-icon">🎉</div>
-                <h2 id="modal-title">STAGE CLEAR!</h2>
+                <h2 id="modal-title">시험 통과!</h2>
                 <p id="modal-message">훌륭한 마법사군요!</p>
                 <div class="stats-box">
-                    <div>맞힌 단어: <strong id="modal-words-count">0</strong>개</div>
-                    <div>획득 점수: <strong id="modal-score">0</strong>점</div>
+                    <div>이번 시험 점수: <strong id="modal-score">0</strong>점</div>
+                    <div>누적 총 점수: <strong id="modal-total-score">0</strong>점</div>
                     <div>최대 콤보: <strong id="modal-max-combo">0</strong>회</div>
                 </div>
                 <div class="modal-buttons">
-                    <button id="next-stage-btn" class="primary-btn">다음 스테이지 ➡️</button>
-                    <button id="restart-btn" class="sec-btn">다시 하기 🔄</button>
+                    <button id="next-stage-btn" class="primary-btn">다음 계급 시험 도전 ➡️</button>
+                    <button id="map-return-btn" class="sec-btn">승급 맵으로 🗺️</button>
                 </div>
             </div>
         </div>
